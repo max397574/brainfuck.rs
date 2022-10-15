@@ -4,7 +4,7 @@ fn main() {
         println!("Input some brainfuck code as argument");
         return;
     }
-    let instructions: Vec<char> = (&args[1]).chars().collect();
+    let instructions: Vec<char> = args[1].chars().collect();
     let mut mem: [u8; 100] = [0; 100];
     let mut ip: usize = 0;
     let mut i: usize = 0;

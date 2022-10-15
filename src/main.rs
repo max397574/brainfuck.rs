@@ -29,6 +29,14 @@ fn main() {
             "." => {
                 println!("{}", mem[ip] as char)
             }
+            "," => {
+                let mut input = String::new();
+                std::io::stdin()
+                    .read_line(&mut input)
+                    .ok()
+                    .expect("Failed to read line");
+                mem[ip] = input.bytes().nth(0).expect("no byte read");
+            }
             "[" => {
                 if mem[ip] == 0 {
                     while &bf_code[i..i + 1] != "]" {

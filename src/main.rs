@@ -11,7 +11,11 @@ fn main() {
     while i < bf_code.len() {
         match &bf_code[i..i + 1] {
             "+" => mem[ip] += 1,
-            "-" => mem[ip] -= 1,
+            "-" => {
+                if mem[ip] > 0 {
+                    mem[ip] -= 1
+                }
+            }
             ">" => {
                 if ip != 99 {
                     ip += 1

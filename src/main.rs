@@ -8,6 +8,7 @@ fn main() {
     let mut mem: [u8; 100] = [0; 100];
     let mut ip: usize = 0;
     let mut i: usize = 0;
+    let mut open_brackets: u8;
     while i < bf_code.len() {
         match &bf_code[i..i + 1] {
             "+" => mem[ip] += 1,
@@ -18,16 +19,16 @@ fn main() {
             }
             ">" => {
                 if ip != 99 {
-                    ip += 1
+                    ip += 1;
                 }
             }
             "<" => {
                 if ip != 0 {
-                    ip -= 1
+                    ip -= 1;
                 }
             }
             "." => {
-                println!("{}", mem[ip] as char)
+                println!("{}", mem[ip] as char);
             }
             "," => {
                 let mut input = String::new();
@@ -40,14 +41,21 @@ fn main() {
             "[" => {
                 if mem[ip] == 0 {
                     while &bf_code[i..i + 1] != "]" {
-                        i += 1
+                        i += 1;
                     }
                 }
             }
             "]" => {
                 if mem[ip] != 0 {
-                    while &bf_code[i..i + 1] != "[" {
-                        i -= 1
+                    open_brackets = 1;
+                    while open_brackets > 0 {
+                        if &bf_code[i..i + 1] == "[" {
+                            open_brackets -= 1;
+                        }
+                        i -= 1;
+                        if &bf_code[i..i + 1] == "]" {
+                            open_brackets += 1;
+                        }
                     }
                 }
             }
